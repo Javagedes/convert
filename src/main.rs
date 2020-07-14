@@ -69,21 +69,43 @@ fn main() {
    let mut j = 1;
    let mut i = Num::Bin;
    let mut o = Num::Ascii;
+   let mut f: Option<&str> = None;
    let mut nums = "";
  
    while j < args.len() {  
-       if args[j] == "-i" || args[j] == "-in" {
-           j+=1;
-           i = Num::from(args[j]);
-       }
-       else if args[j] == "-o" || args[j] == "-out"{
-           j+=1;
-           o = Num::from(args[j]);
-       }
-       else {
-           nums = args[j]
-       }
-       j+=1;
+      if args[j] == "-i" || args[j] == "-in" {
+         j+=1;
+         i = Num::from(args[j]);
+      }
+      else if args[j] == "-o" || args[j] == "-out"{
+         j+=1;
+         o = Num::from(args[j]);
+      }
+      else if args[j] == "-f" || args[j] == "-file"{
+         j+=1;
+         f = Some(args[j]);
+      }
+      else {
+         nums = args[j]
+      }
+      j+=1;
    }
-   convert(i, o, nums)
+
+   use std::path::PathBuf;
+   use std::io::BufReader;
+   use std::io::BufRead;
+   use std::fs::File;
+   if f == None {
+      convert(i, o, nums)
+   }
+   else {
+      let mut path = PathBuf::new();
+      path.push(env::current_dir().unwrap().as_path());
+      path.push(f.unwrap());
+
+      for line in BufReader::new(File::open(path).unwrap()).lines() {
+         line.unwrap().as_bytes().iter().for_each(|b| o.print_as(b));
+         println!();
+      }
+   } 
 }
