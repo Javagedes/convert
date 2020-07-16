@@ -2,9 +2,9 @@
 A Simple command line executable for converting between common numbering systems.
 
 ## Inputs
-*-i, -in: Numbering system of input data
-*-o, -out: Numbering system to be converted to
-*-f, -file: A File to read for data
+* -i, -in: Numbering system of input data
+* -o, -out: Numbering system to be converted to
+* -f, -file: A File to read for data
 
 ## Numbering systems
 * ascii
