@@ -1,5 +1,5 @@
 # convert
-A Simple command line executable for converting between common numbering systems per byte
+A Simple command line executable for converting between common numbering systems one byte at a time
 
 ## Inputs
 * -i, -in: Numbering system of input data
